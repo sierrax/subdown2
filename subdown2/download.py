@@ -11,6 +11,7 @@ import threading
 import Queue
 import log
 import urllib
+import urlparse
 
 IMAGE_Q = Queue.Queue()
 
@@ -101,6 +102,14 @@ class Downloader:
         #download the image, so add it to the queue
         self.output('Adding %s to queue.' % link)
         IMAGE_Q.put((link, path, self.time))
+
+    def Gfycat(self, link):
+	url_lst = list(urlparse.urlparse(link))
+        url_lst[1] = 'fat.gfycat.com'
+        url_lst[2] = url_lst[2] + '.mp4'
+        link = urlparse.urlunparse(url_lst)
+        self.output('Checking link: %s.' % link)
+	self.Raw(link)
 
     def Imgur(self, link):
         if '.' in link.split('/')[-1]:  # raw link but no i. prefix

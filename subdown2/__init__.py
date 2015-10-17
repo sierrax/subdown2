@@ -133,6 +133,8 @@ class DownloadThread(threading.Thread):
                 dl_obj.Twitter(url)
             except:
                 log.log('Skipping %s since it is not supported yet' %(url), thread_name=self.getName(), error=True)
+        elif domain == 'gfycat.com':
+            dl_obj.Gfycat(url)
         elif domain == 'yfrog.com':
             dl_obj.yfrog(url)
         elif domain == 'pagebin.com':
